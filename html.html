@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para mi Janeth, mi todo ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeef8, #ff9ecd, #ff69b4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Dancing Script', cursive;
+            overflow: hidden;
+            position: relative;
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        /* Corazones y pétalos flotantes */
+        .flotante {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0.6;
+            pointer-events: none;
+            animation: flotar linear infinite;
+        }
+
+        @keyframes flotar {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            15% { opacity: 0.8; }
+            85% { opacity: 0.8; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        /* Heartbeat en el título */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .tarjeta {
+            background: rgba(255, 255, 255, 0.97);
+            border-radius: 25px;
+            padding: 50px 40px;
+            max-width: 700px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            position: relative;
+            z-index: 10;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            box-sizing: border-box;
+        }
+
+        .tarjeta::before {
+            content: '❤️ 💕 ❤️ 💕 ❤️ 💕 ❤️';
+            position: absolute;
+            top: -18px;
+            left: 0;
+            right: 0;
+            font-size: 22px;
+            color: #ff69b4;
+            letter-spacing: 15px;
+        }
+
+        .tarjeta::after {
+            content: '❤️ 💕 ❤️ 💕 ❤️ 💕 ❤️';
+            position: absolute;
+            bottom: -18px;
+            left: 0;
+            right: 0;
+            font-size: 22px;
+            color: #ff69b4;
+            letter-spacing: 15px;
+        }
+
+        h1 {
+            font-family: 'Great Vibes', cursive;
+            font-size: clamp(2.8rem, 10vw, 4.5rem);
+            color: #d63384;
+            margin: 0 0 30px 0;
+            animation: heartbeat 3s ease-in-out infinite;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Carrusel slide responsive */
+        .carrusel {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            max-height: 500px;
+            min-height: 300px;
+            margin: 40px 0;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .slides {
+            display: flex;
+            width: 300%;
+            height: 100%;
+            transition: transform 0.8s ease-in-out;
+        }
+
+        .slides img {
+            width: 33.333%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.85);
+            border: none;
+            font-size: clamp(2rem, 6vw, 3rem);
+            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn:hover {
+            background: white;
+            transform: translateY(-50%) scale(1.15);
+        }
+
+        .prev { left: 15px; }
+        .next { right: 15px; }
+
+        /* Dots */
+        .dots {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .dot {
+            width: 14px;
+            height: 14px;
+            background: rgba(214, 51, 132, 0.4);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.activo {
+            background: #d63384;
+            transform: scale(1.5);
+        }
+
+        .dot:hover {
+            background: #d63384;
+        }
+
+        .mensaje p {
+            font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+            color: #444;
+            line-height: 1.7;
+            margin: 18px 0;
+            opacity: 0;
+            animation: aparecer 1.5s forwards;
+        }
+
+        .mensaje p:nth-child(1) { animation-delay: 0.5s; }
+        .mensaje p:nth-child(2) { animation-delay: 1.2s; }
+        .mensaje p:nth-child(3) { animation-delay: 1.9s; }
+        .mensaje p:nth-child(4) { animation-delay: 2.6s; }
+        .mensaje p:nth-child(5) { animation-delay: 3.3s; }
+
+        @keyframes aparecer {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+
+        .firma {
+            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-family: 'Great Vibes', cursive;
+            color: #d63384;
+            margin-top: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        /* Ajustes específicos para móviles */
+        @media (max-width: 768px) {
+            .tarjeta {
+                padding: 40px 25px;
+                border-radius: 20px;
+            }
+
+            .tarjeta::before,
+            .tarjeta::after {
+                font-size: 18px;
+                letter-spacing: 10px;
+                top: -15px;
+                bottom: -15px;
+            }
+
+            .carrusel {
+                height: 50vh;
+                min-height: 280px;
+                margin: 30px 0;
+            }
+
+            .btn {
+                padding: 12px 18px;
+            }
+
+            .dots {
+                gap: 12px;
+                margin-top: 15px;
+            }
+
+            .dot {
+                width: 12px;
+                height: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tarjeta {
+                padding: 30px 20px;
+            }
+
+            .carrusel {
+                height: 45vh;
+                min-height: 250px;
+            }
+
+            .mensaje p {
+                margin: 15px 0;
+            }
+
+            .firma {
+                margin-top: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="tarjeta">
+        <h1>Para ti, mi Janeth ❤️</h1>
+
+        <div class="carrusel">
+            <div class="slides">
+                <img src="foto1.jpg" alt="Recuerdo 1">
+                <img src="foto2.jpg" alt="Recuerdo 2">
+                <img src="foto3.jpg" alt="Recuerdo 3">
+            </div>
+
+            <button class="btn prev" onclick="cambiarFoto(-1)">❮</button>
+            <button class="btn next" onclick="cambiarFoto(1)">❯</button>
+        </div>
+
+        <div class="dots">
+            <span class="dot activo" onclick="irAFoto(0)"></span>
+            <span class="dot" onclick="irAFoto(1)"></span>
+            <span class="dot" onclick="irAFoto(2)"></span>
+        </div>
+
+        <div class="mensaje">
+            <p>Janeth, mi amor infinito,</p>
+            <p>En tus ojos encuentro mi universo entero,<br>tu risa es la melodía que nunca quiero olvidar.</p>
+            <p>Cada instante contigo es un sueño hecho realidad,<br>y cada recuerdo, un tesoro que guardo en el alma.</p>
+            <p>Contigo aprendí lo que es amar de verdad.<br>Eres mi hoy, mi mañana y mi siempre.</p>
+            <p>Te amo con todo mi ser, hoy y para siempre ❤️</p>
+        </div>
+
+        <p class="firma">Tuyo por siempre, con todo mi corazón</p>
+    </div>
+
+    <script>
+        let indice = 0;
+        const total = 3;
+        const slides = document.querySelector('.slides');
+        const dots = document.querySelectorAll('.dot');
+
+        function actualizarCarrusel() {
+            slides.style.transform = `translateX(-${indice * 33.333}%)`;
+            dots.forEach((dot, i) => dot.classList.toggle('activo', i === indice));
+        }
+
+        function cambiarFoto(dir) {
+            indice = (indice + dir + total) % total;
+            actualizarCarrusel();
+        }
+
+        function irAFoto(n) {
+            indice = n;
+            actualizarCarrusel();
+        }
+
+        // Auto avance cada 6 segundos
+        setInterval(() => cambiarFoto(1), 6000);
+
+        // Elementos flotantes (corazones y pétalos)
+        const elementos = ['❤️', '💕', '💖', '💗', '🌹', '🥀'];
+        function crearFlotante() {
+            const el = document.createElement('div');
+            el.classList.add('flotante');
+            el.innerHTML = elementos[Math.floor(Math.random() * elementos.length)];
+            el.style.left = Math.random() * 100 + 'vw';
+            el.style.fontSize = (Math.random() * 15 + 20) + 'px';
+            el.style.color = ['#ff69b4', '#d63384', '#ff1493', '#ff4499'][Math.floor(Math.random() * 4)];
+            el.style.animationDuration = (Math.random() * 10 + 12) + 's';
+            document.body.appendChild(el);
+
+            setTimeout(() => el.remove(), 22000);
+        }
+
+        // Menos elementos en móviles para mejor rendimiento
+        const intervalTime = window.innerWidth <= 768 ? 900 : 600;
+        setInterval(crearFlotante, intervalTime);
+    </script>
+</body>
+</html>
