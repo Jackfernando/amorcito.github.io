@@ -12,101 +12,112 @@
             background: linear-gradient(135deg, #ffeef8, #ff9ecd, #ff69b4);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start; /* Cambiado para que empiece desde arriba si es muy alto */
             font-family: 'Dancing Script', cursive;
-            overflow: hidden;
+            overflow-y: auto; /* Ahora permite scroll vertical si el contenido no cabe (celulares pequeños) */
             position: relative;
             padding: 20px 10px;
             box-sizing: border-box;
         }
 
-        /* Corazones y pétalos flotantes */
+        /* Corazones y pétalos flotantes (más variados y bonitos) */
         .flotante {
             position: absolute;
             font-size: 25px;
-            opacity: 0.6;
+            opacity: 0.65;
             pointer-events: none;
             animation: flotar linear infinite;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         @keyframes flotar {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            15% { opacity: 0.8; }
-            85% { opacity: 0.8; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+            0% { transform: translateY(100vh) rotate(0deg) scale(0.8); opacity: 0; }
+            15% { opacity: 0.85; }
+            85% { opacity: 0.85; }
+            100% { transform: translateY(-120px) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
         /* Heartbeat en el título */
         @keyframes heartbeat {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
+            14% { transform: scale(1.05); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.05); }
+            70% { transform: scale(1); }
         }
 
         .tarjeta {
-            background: rgba(255, 255, 255, 0.97);
-            border-radius: 25px;
-            padding: 50px 40px;
-            max-width: 700px;
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            padding: 60px 45px;
+            max-width: 750px;
             width: 100%;
             text-align: center;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.3);
             position: relative;
             z-index: 10;
-            border: 3px solid transparent;
+            animation: entrar 1.8s ease-out;
+            border: 4px solid #ff69b4;
             background-clip: padding-box;
             box-sizing: border-box;
         }
 
+        @keyframes entrar {
+            0% { opacity: 0; transform: translateY(50px) scale(0.95); }
+            100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
         .tarjeta::before {
-            content: '❤️ 💕 ❤️ 💕 ❤️ 💕 ❤️';
+            content: '❤️ 💕 💖 ❤️ 💕 💖 ❤️';
             position: absolute;
-            top: -18px;
+            top: -22px;
             left: 0;
             right: 0;
-            font-size: 22px;
-            color: #ff69b4;
-            letter-spacing: 15px;
+            font-size: 26px;
+            color: #ff1493;
+            letter-spacing: 18px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .tarjeta::after {
-            content: '❤️ 💕 ❤️ 💕 ❤️ 💕 ❤️';
+            content: '💖 ❤️ 💕 💖 ❤️ 💕 💖';
             position: absolute;
-            bottom: -18px;
+            bottom: -22px;
             left: 0;
             right: 0;
-            font-size: 22px;
-            color: #ff69b4;
-            letter-spacing: 15px;
+            font-size: 26px;
+            color: #ff1493;
+            letter-spacing: 18px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: clamp(2.8rem, 10vw, 4.5rem);
+            font-size: clamp(3rem, 11vw, 5rem);
             color: #d63384;
-            margin: 0 0 30px 0;
-            animation: heartbeat 3s ease-in-out infinite;
-            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.15);
+            margin: 0 0 35px 0;
+            animation: heartbeat 4s ease-in-out infinite;
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Carrusel slide responsive */
+        /* Carrusel */
         .carrusel {
             position: relative;
             width: 100%;
             height: 55vh;
-            max-height: 500px;
+            max-height: 550px;
             min-height: 300px;
             margin: 40px 0;
             overflow: hidden;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
         }
 
         .slides {
             display: flex;
             width: 300%;
             height: 100%;
-            transition: transform 0.8s ease-in-out;
+            transition: transform 0.9s cubic-bezier(0.68, -0.55, 0.27, 1.55);
         }
 
         .slides img {
@@ -120,131 +131,124 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.9);
             border: none;
-            font-size: clamp(2rem, 6vw, 3rem);
-            padding: clamp(10px, 3vw, 15px) clamp(15px, 4vw, 20px);
+            font-size: clamp(2.2rem, 7vw, 3.5rem);
+            padding: clamp(12px, 4vw, 18px) clamp(18px, 5vw, 25px);
             cursor: pointer;
             border-radius: 50%;
             z-index: 10;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.4s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .btn:hover {
             background: white;
-            transform: translateY(-50%) scale(1.15);
+            transform: translateY(-50%) scale(1.2);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
         }
 
         .prev { left: 15px; }
         .next { right: 15px; }
 
-        /* Dots */
-        .dots {
+        /* Barra de progreso chingona debajo del carrusel */
+        .progress-container {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin-top: 20px;
+            margin: 25px 0;
+            padding: 0 20px;
         }
 
-        .dot {
-            width: 14px;
-            height: 14px;
-            background: rgba(214, 51, 132, 0.4);
-            border-radius: 50%;
-            cursor: pointer;
-            transition: all 0.3s;
+        .progress-bar {
+            flex: 1;
+            max-width: 200px;
+            height: 6px;
+            background: rgba(214, 51, 132, 0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .dot.activo {
-            background: #d63384;
-            transform: scale(1.5);
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff69b4, #d63384);
+            border-radius: 10px;
+            transition: width 0.3s ease;
         }
 
-        .dot:hover {
-            background: #d63384;
+        .progress-fill.activo {
+            animation: llenar 6s linear forwards;
+        }
+
+        @keyframes llenar {
+            from { width: 0%; }
+            to { width: 100%; }
         }
 
         .mensaje p {
-            font-size: clamp(1.3rem, 4.5vw, 1.8rem);
+            font-size: clamp(1.4rem, 5vw, 1.9rem);
             color: #444;
-            line-height: 1.7;
-            margin: 18px 0;
+            line-height: 1.8;
+            margin: 20px 0;
             opacity: 0;
-            animation: aparecer 1.5s forwards;
+            animation: aparecer 1.8s forwards;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
-        .mensaje p:nth-child(1) { animation-delay: 0.5s; }
-        .mensaje p:nth-child(2) { animation-delay: 1.2s; }
-        .mensaje p:nth-child(3) { animation-delay: 1.9s; }
-        .mensaje p:nth-child(4) { animation-delay: 2.6s; }
-        .mensaje p:nth-child(5) { animation-delay: 3.3s; }
+        .mensaje p:nth-child(1) { animation-delay: 0.8s; }
+        .mensaje p:nth-child(2) { animation-delay: 1.5s; }
+        .mensaje p:nth-child(3) { animation-delay: 2.2s; }
+        .mensaje p:nth-child(4) { animation-delay: 2.9s; }
+        .mensaje p:nth-child(5) { animation-delay: 3.6s; }
 
         @keyframes aparecer {
             to { opacity: 1; transform: translateY(0); }
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(25px); }
         }
 
         .firma {
-            font-size: clamp(1.8rem, 6vw, 2.5rem);
+            font-size: clamp(2rem, 7vw, 2.8rem);
             font-family: 'Great Vibes', cursive;
             color: #d63384;
-            margin-top: 50px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-top: 60px;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.15);
+            animation: heartbeat 4s ease-in-out infinite 2s;
         }
 
-        /* Ajustes específicos para móviles */
+        /* Responsive fino */
         @media (max-width: 768px) {
             .tarjeta {
-                padding: 40px 25px;
-                border-radius: 20px;
+                padding: 45px 30px;
+                border-radius: 25px;
             }
 
             .tarjeta::before,
             .tarjeta::after {
-                font-size: 18px;
-                letter-spacing: 10px;
-                top: -15px;
-                bottom: -15px;
+                font-size: 20px;
+                letter-spacing: 12px;
             }
 
             .carrusel {
                 height: 50vh;
                 min-height: 280px;
-                margin: 30px 0;
             }
 
-            .btn {
-                padding: 12px 18px;
-            }
-
-            .dots {
-                gap: 12px;
-                margin-top: 15px;
-            }
-
-            .dot {
-                width: 12px;
-                height: 12px;
+            .progress-container {
+                gap: 10px;
+                padding: 0 10px;
             }
         }
 
         @media (max-width: 480px) {
             .tarjeta {
-                padding: 30px 20px;
+                padding: 35px 20px;
             }
 
             .carrusel {
                 height: 45vh;
-                min-height: 250px;
-            }
-
-            .mensaje p {
-                margin: 15px 0;
-            }
-
-            .firma {
-                margin-top: 40px;
+                min-height: 260px;
             }
         }
     </style>
@@ -265,10 +269,11 @@
             <button class="btn next" onclick="cambiarFoto(1)">❯</button>
         </div>
 
-        <div class="dots">
-            <span class="dot activo" onclick="irAFoto(0)"></span>
-            <span class="dot" onclick="irAFoto(1)"></span>
-            <span class="dot" onclick="irAFoto(2)"></span>
+        <!-- Barras de progreso (una por foto, la activa se llena sola) -->
+        <div class="progress-container">
+            <div class="progress-bar"><div class="progress-fill activo"></div></div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
+            <div class="progress-bar"><div class="progress-fill"></div></div>
         </div>
 
         <div class="mensaje">
@@ -286,11 +291,22 @@
         let indice = 0;
         const total = 3;
         const slides = document.querySelector('.slides');
-        const dots = document.querySelectorAll('.dot');
+        const fills = document.querySelectorAll('.progress-fill');
 
         function actualizarCarrusel() {
             slides.style.transform = `translateX(-${indice * 33.333}%)`;
-            dots.forEach((dot, i) => dot.classList.toggle('activo', i === indice));
+
+            // Resetear todas las barras
+            fills.forEach((fill, i) => {
+                fill.classList.remove('activo');
+                fill.style.animation = 'none';
+                fill.offsetHeight; // Reflow
+                fill.style.animation = null;
+                
+                if (i === indice) {
+                    fill.classList.add('activo');
+                }
+            });
         }
 
         function cambiarFoto(dir) {
@@ -306,23 +322,25 @@
         // Auto avance cada 6 segundos
         setInterval(() => cambiarFoto(1), 6000);
 
-        // Elementos flotantes (corazones y pétalos)
-        const elementos = ['❤️', '💕', '💖', '💗', '🌹', '🥀'];
+        // Iniciar la primera barra
+        actualizarCarrusel();
+
+        // Elementos flotantes más bonitos
+        const elementos = ['❤️', '💕', '💖', '💗', '🌹', '🥀', '✨', '🌸'];
         function crearFlotante() {
             const el = document.createElement('div');
             el.classList.add('flotante');
             el.innerHTML = elementos[Math.floor(Math.random() * elementos.length)];
             el.style.left = Math.random() * 100 + 'vw';
-            el.style.fontSize = (Math.random() * 15 + 20) + 'px';
-            el.style.color = ['#ff69b4', '#d63384', '#ff1493', '#ff4499'][Math.floor(Math.random() * 4)];
-            el.style.animationDuration = (Math.random() * 10 + 12) + 's';
+            el.style.fontSize = (Math.random() * 20 + 22) + 'px';
+            el.style.color = ['#ff69b4', '#d63384', '#ff1493', '#ff4499', '#ff1493'][Math.floor(Math.random() * 5)];
+            el.style.animationDuration = (Math.random() * 12 + 12) + 's';
             document.body.appendChild(el);
 
-            setTimeout(() => el.remove(), 22000);
+            setTimeout(() => el.remove(), 24000);
         }
 
-        // Menos elementos en móviles para mejor rendimiento
-        const intervalTime = window.innerWidth <= 768 ? 900 : 600;
+        const intervalTime = window.innerWidth <= 768 ? 900 : 500;
         setInterval(crearFlotante, intervalTime);
     </script>
 </body>
